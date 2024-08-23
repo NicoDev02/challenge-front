@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Fontspring-DEMO-ceraroundpro-black.otf",
+      "sha1": "7b6ec5b127f109d5880808e56ed0090c2eddc366"
+    },
+    {
+      "path": "src/assets/fonts/Fontspring-DEMO-ceraroundpro-bold.otf",
+      "sha1": "6b8c58a713c2cd02ef700933918a2a478508f605"
+    },
+    {
+      "path": "src/assets/fonts/Fontspring-DEMO-ceraroundpro-light.otf",
+      "sha1": "20015049613a7733c3d03ccae5d265dbfb29bef8"
+    },
+    {
+      "path": "src/assets/fonts/Fontspring-DEMO-ceraroundpro-medium.otf",
+      "sha1": "03fa3c97e99ce054cc8b1767292c463e09da34cb"
+    },
+    {
+      "path": "src/assets/fonts/Fontspring-DEMO-ceraroundpro-regular.otf",
+      "sha1": "58bd4dde5096a0e66fa6f98609f96003530bce69"
+    },
+    {
+      "path": "src/assets/fonts/Fontspring-DEMO-ceraroundpro-thin.otf",
+      "sha1": "8a521e6a0d9dd5641479e59f4ba30eb1350d1330"
+    }
+  ]
+}

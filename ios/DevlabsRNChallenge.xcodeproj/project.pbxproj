@@ -14,6 +14,12 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-DevlabsRNChallenge-DevlabsRNChallengeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-DevlabsRNChallenge-DevlabsRNChallengeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		D1D031DDB71943FBBCB0440A /* Fontspring-DEMO-ceraroundpro-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF3F75E728F24CA8BD156723 /* Fontspring-DEMO-ceraroundpro-black.otf */; };
+		8816C82EC0F3425BBB428356 /* Fontspring-DEMO-ceraroundpro-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 09DA70BDA2C548759B1873D7 /* Fontspring-DEMO-ceraroundpro-bold.otf */; };
+		046FA009B08D4C0F8BB101AF /* Fontspring-DEMO-ceraroundpro-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9E0BDEF86B55448F877E5CC1 /* Fontspring-DEMO-ceraroundpro-light.otf */; };
+		587D5C1E196648E3B3E58655 /* Fontspring-DEMO-ceraroundpro-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7715B2898FD24DC9A8F7C84A /* Fontspring-DEMO-ceraroundpro-medium.otf */; };
+		063A1CDCEE9C49E4A6FB1469 /* Fontspring-DEMO-ceraroundpro-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 113B62CA402C4ED5B01BDAE1 /* Fontspring-DEMO-ceraroundpro-regular.otf */; };
+		32974FDD035A481E90382813 /* Fontspring-DEMO-ceraroundpro-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4660998FEB9B4052A1B9931C /* Fontspring-DEMO-ceraroundpro-thin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +42,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DevlabsRNChallenge/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DevlabsRNChallenge/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DevlabsRNChallenge/main.m; sourceTree = "<group>"; };
-	    13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = DevlabsRNChallenge/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = DevlabsRNChallenge/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-DevlabsRNChallenge-DevlabsRNChallengeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DevlabsRNChallenge-DevlabsRNChallengeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-DevlabsRNChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevlabsRNChallenge.debug.xcconfig"; path = "Target Support Files/Pods-DevlabsRNChallenge/Pods-DevlabsRNChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-DevlabsRNChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevlabsRNChallenge.release.xcconfig"; path = "Target Support Files/Pods-DevlabsRNChallenge/Pods-DevlabsRNChallenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -45,6 +51,12 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DevlabsRNChallenge/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-DevlabsRNChallenge-DevlabsRNChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevlabsRNChallenge-DevlabsRNChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-DevlabsRNChallenge-DevlabsRNChallengeTests/Pods-DevlabsRNChallenge-DevlabsRNChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FF3F75E728F24CA8BD156723 /* Fontspring-DEMO-ceraroundpro-black.otf */ = {isa = PBXFileReference; name = "Fontspring-DEMO-ceraroundpro-black.otf"; path = "../src/assets/fonts/Fontspring-DEMO-ceraroundpro-black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		09DA70BDA2C548759B1873D7 /* Fontspring-DEMO-ceraroundpro-bold.otf */ = {isa = PBXFileReference; name = "Fontspring-DEMO-ceraroundpro-bold.otf"; path = "../src/assets/fonts/Fontspring-DEMO-ceraroundpro-bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9E0BDEF86B55448F877E5CC1 /* Fontspring-DEMO-ceraroundpro-light.otf */ = {isa = PBXFileReference; name = "Fontspring-DEMO-ceraroundpro-light.otf"; path = "../src/assets/fonts/Fontspring-DEMO-ceraroundpro-light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7715B2898FD24DC9A8F7C84A /* Fontspring-DEMO-ceraroundpro-medium.otf */ = {isa = PBXFileReference; name = "Fontspring-DEMO-ceraroundpro-medium.otf"; path = "../src/assets/fonts/Fontspring-DEMO-ceraroundpro-medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		113B62CA402C4ED5B01BDAE1 /* Fontspring-DEMO-ceraroundpro-regular.otf */ = {isa = PBXFileReference; name = "Fontspring-DEMO-ceraroundpro-regular.otf"; path = "../src/assets/fonts/Fontspring-DEMO-ceraroundpro-regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4660998FEB9B4052A1B9931C /* Fontspring-DEMO-ceraroundpro-thin.otf */ = {isa = PBXFileReference; name = "Fontspring-DEMO-ceraroundpro-thin.otf"; path = "../src/assets/fonts/Fontspring-DEMO-ceraroundpro-thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +136,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				B8B83F6E3B154D16B05580B6 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -149,6 +162,20 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		B8B83F6E3B154D16B05580B6 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				FF3F75E728F24CA8BD156723 /* Fontspring-DEMO-ceraroundpro-black.otf */,
+				09DA70BDA2C548759B1873D7 /* Fontspring-DEMO-ceraroundpro-bold.otf */,
+				9E0BDEF86B55448F877E5CC1 /* Fontspring-DEMO-ceraroundpro-light.otf */,
+				7715B2898FD24DC9A8F7C84A /* Fontspring-DEMO-ceraroundpro-medium.otf */,
+				113B62CA402C4ED5B01BDAE1 /* Fontspring-DEMO-ceraroundpro-regular.otf */,
+				4660998FEB9B4052A1B9931C /* Fontspring-DEMO-ceraroundpro-thin.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +272,12 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				D1D031DDB71943FBBCB0440A /* Fontspring-DEMO-ceraroundpro-black.otf in Resources */,
+				8816C82EC0F3425BBB428356 /* Fontspring-DEMO-ceraroundpro-bold.otf in Resources */,
+				046FA009B08D4C0F8BB101AF /* Fontspring-DEMO-ceraroundpro-light.otf in Resources */,
+				587D5C1E196648E3B3E58655 /* Fontspring-DEMO-ceraroundpro-medium.otf in Resources */,
+				063A1CDCEE9C49E4A6FB1469 /* Fontspring-DEMO-ceraroundpro-regular.otf in Resources */,
+				32974FDD035A481E90382813 /* Fontspring-DEMO-ceraroundpro-thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
