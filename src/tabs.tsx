@@ -17,7 +17,7 @@ const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
   const {token} = useAppSelector(state => state.user);
-  apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
   return (
     <NavigationContainer>
       <Tab.Navigator>

@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {
   CreateProductButton,
   CreateProductContainer,
+  DeleteButton,
   ImagePreview,
+  ImagePreviewContainer,
   SizePill,
   StyledFlatList,
   StyledInput,
@@ -13,13 +15,18 @@ import {ColumnView, RowView, StyledText} from '../../globalStyles';
 
 import UploadSVG from '../../assets/Upload.svg';
 import ArrowBackSVG from '../../assets/ArrowBack.svg';
+import DeleteSVG from '../../assets/DeleteBin.svg';
 import Categories from '../categories';
 import {CategoryType} from '../../slices/categorySlice';
 import {ItemSeparator} from '../home/styles';
-import {ActivityIndicator, TouchableOpacity} from 'react-native';
+import {
+  ActivityIndicator,
+  ListRenderItem,
+  TouchableOpacity,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import apiClient from '../../axios';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, {Image} from 'react-native-image-crop-picker';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getAllCategories} from '../../actions/categoryActions';
 import {createProduct} from '../../actions/productActions';
@@ -58,10 +65,27 @@ const intialSizes = [
   {size: 'Large', price: 0},
 ];
 
+const ImageItem = ({
+  image,
+  handleDelete,
+}: {
+  image: Image;
+  handleDelete: (path: string) => void;
+}) => {
+  return (
+    <ImagePreviewContainer>
+      <ImagePreview source={{uri: image.path}} />
+      <DeleteButton onPress={() => handleDelete(image.path)}>
+        <DeleteSVG width={18} height={18} fill="red" />
+      </DeleteButton>
+    </ImagePreviewContainer>
+  );
+};
+
 const CreateProduct = () => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(state => state.category.categories);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<Image[]>([]);
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>(
     categories[0],
@@ -82,6 +106,7 @@ const CreateProduct = () => {
   }, [dispatch]);
   const handleImagePicker = async () => {
     try {
+      setIsLoadingImage(true);
       const image = await ImagePicker.openPicker({
         width: 300,
         height: 300,
@@ -89,15 +114,14 @@ const CreateProduct = () => {
         mediaType: 'photo',
         includeBase64: true,
       });
-      setIsLoadingImage(true);
-      const response = await apiClient.post('/cloudinary/upload', {
-        image: image.data,
-      });
+      if (image) {
+        setImageUrls([...imageUrls, image]);
+      } else {
+        throw new Error('Error selecting image');
+      }
       setIsLoadingImage(false);
-      setImageUrls([...imageUrls, response.data.url]);
-      console.log(response.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -113,29 +137,45 @@ const CreateProduct = () => {
     isLoadingImage ||
     imageUrls.length === 0 ||
     sizes.every(size => size.price <= 0) ||
-    categories.every(category => !category.name) ||
+    categories.every((category: CategoryType) => !category.name) ||
     name === '' ||
     description === '' ||
     about === '';
 
-  console.log(isButtonDisabled);
   const onSubmit = async (data: FieldValues) => {
     try {
+      let images: string[] = [];
+      await Promise.all(
+        imageUrls.map(async image => {
+          const response = await apiClient.post('/cloudinary/upload', {
+            image: image.data,
+          });
+
+          images.push(response.data.url);
+        }),
+      );
+
       const payload = {
         name: data.name,
         description: data.description,
         about: data.about,
-        imageUrl: imageUrls.join(','),
+        imageUrl: images.join(','),
         sizes: sizes.filter(size => size.price > 0),
         stock: 100,
         categoryId: selectedCategory.id,
       };
-      console.log(payload);
       await dispatch(createProduct(payload));
+      navigation.goBack();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
+  const handleDelete = (path: string) => {
+    setImageUrls(imageUrls.filter(image => image.path !== path));
+  };
+  const renderItem: ListRenderItem<Image> = ({item}) => (
+    <ImageItem image={item} handleDelete={() => handleDelete(item.path)} />
+  );
   return (
     <CreateProductContainer>
       <RowView>
@@ -240,8 +280,9 @@ const CreateProduct = () => {
       <StyledFlatList
         ItemSeparatorComponent={ItemSeparator}
         horizontal
-        data={imageUrls}
-        renderItem={({item}) => <ImagePreview src={item as string} />}
+        data={imageUrls as Image[]}
+        //@ts-ignore
+        renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
       <CreateProductButton

@@ -63,12 +63,27 @@ export const UploadButton = styled.TouchableOpacity({
   borderWidth: 3,
 });
 
+export const ImagePreviewContainer = styled.View({
+  width: 150,
+  height: 150,
+  borderRadius: 30,
+});
+
 export const ImagePreview = styled.Image({
   width: 150,
   height: 150,
   borderRadius: 30,
   marginBottom: 20,
   alignSelf: 'center',
+});
+
+export const DeleteButton = styled.TouchableOpacity({
+  position: 'absolute',
+  top: 15,
+  right: 15,
+  backgroundColor: 'white',
+  borderRadius: 30,
+  padding: 5,
 });
 interface CreateProductButtonProps {
   isDisabled: boolean;
