@@ -1,12 +1,17 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {
+  createProduct,
   deleteProduct,
   getAllProducts,
   getProductById,
   getProductsByCategoryId,
   updateProduct,
 } from '../actions/productActions';
-
+export type SizeType = {
+  id: string;
+  size: string;
+  price: number;
+};
 export type ProductType = {
   name: string;
   description: string;
@@ -16,13 +21,7 @@ export type ProductType = {
   id: string | undefined;
   createdAt: Date | undefined;
   imageUrl: string | undefined;
-  sizes:
-    | {
-        id: string;
-        name: string;
-        price: number;
-      }[]
-    | undefined;
+  sizes: SizeType[] | undefined;
 };
 type InitialStateType = {
   products: ProductType[];
@@ -110,6 +109,7 @@ const productSlice = createSlice({
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = undefined;
+        console.log(action.payload);
         state.product = action.payload;
         state.products = state.products.map(product => {
           if (product.id === action.payload.id) {
@@ -123,6 +123,17 @@ const productSlice = createSlice({
         state.error = undefined;
       })
       .addCase(updateProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+      .addCase(createProduct.fulfilled, (state, action) => {
+        state.products.push(action.payload);
+        state.isLoading = false;
+      })
+      .addCase(createProduct.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(createProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       });

@@ -9,10 +9,16 @@ import {
 } from './style';
 import {RowView, StyledText} from '../../globalStyles';
 
-const ProductCard = ({product}: {product: ProductType}) => {
+const ProductCard = ({
+  product,
+  handleProduct,
+}: {
+  product: ProductType;
+  handleProduct: (productId: string) => void;
+}) => {
   return (
-    <ProductContainer>
-      <ProductImage source={{uri: product.imageUrl}} />
+    <ProductContainer onPress={() => handleProduct(product.id || '')}>
+      <ProductImage src={product.imageUrl?.split(',')[0]} />
       <StyledText color="#382E1E" fontSize={20} fontWeight="bold">
         {product.name}
       </StyledText>
@@ -21,14 +27,9 @@ const ProductCard = ({product}: {product: ProductType}) => {
       </StyledText>
       <RowView alignItems="center" justifyContent="space-between">
         <RowView alignItems="center">
-          {/*
-          This separation of '$' and the price is intentional
-          because the font of the app does not have a '$' symbol
-        */}
-          <ProductPriceText>$</ProductPriceText>
-          <StyledText color="black" fontSize={20} fontWeight="bold">
-            {product.sizes?.length && product.sizes[0].price}
-          </StyledText>
+          <ProductPriceText>
+            $ {product.sizes?.length && product.sizes[0].price}
+          </ProductPriceText>
         </RowView>
         <AddToCartButton>
           <PlusSVG />

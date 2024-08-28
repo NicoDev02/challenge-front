@@ -2,7 +2,8 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/store';
 import {PersistGate} from 'redux-persist/integration/react';
-import AppNavigator from './src/tabs';
+import AppNavigator from './src/navigation/tabs/tabs';
+import HomeStack from './src/navigation/stacks/HomeStack';
 
 function App(): React.JSX.Element {
   // const nativeLogin = async (email: string, password: string) => {
@@ -31,7 +32,7 @@ function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <AppNavigator />
+        <HomeStack />
       </PersistGate>
     </Provider>
   );

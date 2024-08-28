@@ -8,7 +8,8 @@ export const StyledInput = styled.TextInput({
   backgroundColor: '#F2F2F2',
   borderRadius: 30,
   color: '#382E1E',
-  fontFamily: 'Fontspring-DEMO-ceraroundpro-bold',
+  fontFamily: 'Sans-Serif',
+  fontWeight: 'bold',
   fontSize: 14,
 });
 

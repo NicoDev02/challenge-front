@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   EmptyProfilePicture,
-  FlatlistFooter,
   HomeContainer,
   ItemSeparator,
   OfferContainer,
@@ -14,130 +13,37 @@ import SearchBar from '../searchBar';
 import {ColumnView, RowView, StyledText} from '../../globalStyles';
 import BellSVG from '../../assets/Bell.svg';
 import Categories from '../categories';
-import CapuccinoSVG from '../../assets/Cappuccino.svg';
-import ColdBrewSVG from '../../assets/ColdBrew.svg';
-import EspressoSVG from '../../assets/Espresso.svg';
-import {CategoryType} from './types';
 import ProductCard from '../productCard';
 import {ProductType} from '../../slices/productSlice';
 import {TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 import {login, logout} from '../../actions/loginActions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-const products: ProductType[] = [
-  {
-    name: 'Cappuccino',
-    sizes: [
-      {
-        id: '1',
-        name: 'Small',
-        price: 2.5,
-      },
-      {
-        id: '2',
-        name: 'Medium',
-        price: 3.5,
-      },
-      {
-        id: '3',
-        name: 'Large',
-        price: 4.5,
-      },
-    ],
-    about:
-      'Cappuccino is a coffee preparation that combines equal parts of espresso and steamed milk.',
-    // max length 48 characters
-    description: 'With chocolate and milk syrup and milk with milk',
-    categoryId: '1',
-    createdAt: new Date(),
-    imageUrl:
-      'https://res.cloudinary.com/dgrmx6aau/image/upload/v1723596273/alpschyojgdf88isbajg.jpg',
-    id: '1',
-    stock: 10,
-  },
-  {
-    name: 'Cappuccino',
-    sizes: [
-      {
-        id: '1',
-        name: 'Small',
-        price: 2.5,
-      },
-      {
-        id: '2',
-        name: 'Medium',
-        price: 3.5,
-      },
-      {
-        id: '3',
-        name: 'Large',
-        price: 4.5,
-      },
-    ],
-    about:
-      'Cappuccino is a coffee preparation that combines equal parts of espresso and steamed milk.',
-    description: 'With milk',
-    categoryId: '1',
-    createdAt: new Date(),
-    imageUrl:
-      'https://res.cloudinary.com/dgrmx6aau/image/upload/v1723596273/alpschyojgdf88isbajg.jpg',
-    id: '2',
-    stock: 10,
-  },
-  {
-    name: 'Cappuccino',
-    sizes: [
-      {
-        id: '1',
-        name: 'Small',
-        price: 2.5,
-      },
-      {
-        id: '2',
-        name: 'Medium',
-        price: 3.5,
-      },
-      {
-        id: '3',
-        name: 'Large',
-        price: 4.5,
-      },
-    ],
-    about:
-      'Cappuccino is a coffee preparation that combines equal parts of espresso and steamed milk.',
-    description: 'With chocolate and milk syrup and milk',
-    categoryId: '1',
-    createdAt: new Date(),
-    imageUrl:
-      'https://res.cloudinary.com/dgrmx6aau/image/upload/v1723596273/alpschyojgdf88isbajg.jpg',
-    id: '3',
-    stock: 10,
-  },
-];
-const initialCategories: CategoryType[] = [
-  {
-    name: 'Cappuccino',
-    icon: CapuccinoSVG,
-    selected: true,
-  },
-  {
-    name: 'Cold Brew',
-    icon: ColdBrewSVG,
-    selected: false,
-  },
-  {
-    name: 'Espresso',
-    icon: EspressoSVG,
-    selected: false,
-  },
-];
+import {CategoryType} from '../../slices/categorySlice';
+import {getAllCategories} from '../../actions/categoryActions';
+import {getAllProducts} from '../../actions/productActions';
+import {HomeScreenNavigationProp} from '../../screens/types';
 
-const Home = () => {
-  const navigation = useNavigation();
-  const [categories, setCategories] = useState(initialCategories);
+type HomeProps = {
+  navigation: HomeScreenNavigationProp;
+};
+
+const Home: React.FC<HomeProps> = ({navigation}) => {
+  const {categories} = useAppSelector(state => state.category);
+  const {products} = useAppSelector(state => state.product);
   const {user} = useAppSelector(state => state.user);
-
   const dispatch = useAppDispatch();
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>(
+    categories[0],
+  );
+  useEffect(() => {
+    dispatch(getAllCategories(null));
+    dispatch(getAllProducts(null));
+  }, [dispatch]);
+
+  const filteredProducts = products.filter(
+    product => product.categoryId === selectedCategory.id,
+  );
+
   const handleLogin = async () => {
     try {
       await dispatch(login());
@@ -155,14 +61,6 @@ const Home = () => {
   const handleAuth = () => {
     user ? handleLogout() : handleLogin();
   };
-  const handleCategoryChange = (category: CategoryType) => {
-    setCategories(
-      categories.map(c => ({
-        ...c,
-        selected: c.name === category.name,
-      })),
-    );
-  };
   return (
     <HomeContainer>
       <ColumnView pt={25} pl={25} pr={25} alignItems="flex-start">
@@ -175,7 +73,7 @@ const Home = () => {
             {user ? (
               <ProfilePicture src={user?.picture} />
             ) : (
-              <EmptyProfilePicture src={user?.picture} />
+              <EmptyProfilePicture />
             )}
           </TouchableOpacity>
           <TouchableOpacity
@@ -196,59 +94,95 @@ const Home = () => {
           Categories
         </StyledText>
         <Categories
+          selectedCategory={selectedCategory}
           categories={categories}
-          onCategoryPress={handleCategoryChange}
+          onCategoryPress={category => {
+            setSelectedCategory(category);
+          }}
         />
       </ColumnView>
       <StyledFlatlist
         horizontal
+        extraData={selectedCategory}
         ItemSeparatorComponent={ItemSeparator}
-        data={products}
+        data={filteredProducts}
         // @ts-ignore
         keyExtractor={item => item.id}
-        renderItem={({item}) => <ProductCard product={item as ProductType} />}
-        ListFooterComponent={
-          <RowView>
-            <ItemSeparator key={1} width={15} />
-            <FlatlistFooter>
-              <StyledText color="black" fontSize={18} fontWeight="bold">
-                Show more
-              </StyledText>
-            </FlatlistFooter>
-            <ItemSeparator key={3} width={10} />
-          </RowView>
-        }
+        renderItem={({item}) => (
+          <ProductCard
+            handleProduct={id =>
+              navigation.navigate('ProductDetail', {productId: id})
+            }
+            product={item as ProductType}
+          />
+        )}
+        // eslint-disable-next-line react-native/no-inline-styles
+        contentContainerStyle={{paddingRight: 10}}
         ListHeaderComponent={
           <RowView>
             <ItemSeparator key={1} width={10} />
           </RowView>
         }
       />
+      {products.length !== 0 && (
+        <>
+          <StyledText
+            color="#382E1E"
+            fontSize={18}
+            fontWeight="bold"
+            pl={25}
+            mb={10}>
+            Special Offer 🔥
+          </StyledText>
+          <OfferContainer>
+            <OfferImage src={products[0].imageUrl?.split(',')[0]} />
+            <ColumnView
+              flex={1}
+              justifyContent="center"
+              padding={15}
+              position="relative">
+              <OfferTag>
+                <StyledText color="white" fontSize={12} fontWeight="bold">
+                  Discount Sales
+                </StyledText>
+              </OfferTag>
+              <StyledText color="#382E1E" fontSize={16} fontWeight="bold">
+                {`Get two ${products[0].name} for the price of one`}
+              </StyledText>
+            </ColumnView>
+          </OfferContainer>
+        </>
+      )}
       <StyledText
         color="#382E1E"
         fontSize={18}
         fontWeight="bold"
-        pl={25}
-        mb={10}>
-        Special Offer 🔥
+        mt={20}
+        mb={10}
+        pl={25}>
+        All Products
       </StyledText>
-      <OfferContainer>
-        <OfferImage src="https://res.cloudinary.com/dgrmx6aau/image/upload/v1723596273/alpschyojgdf88isbajg.jpg" />
-        <ColumnView
-          flex={1}
-          justifyContent="center"
-          padding={15}
-          position="relative">
-          <OfferTag>
-            <StyledText color="white" fontSize={12} fontWeight="bold">
-              Discount Sales
-            </StyledText>
-          </OfferTag>
-          <StyledText color="#382E1E" fontSize={16} fontWeight="bold">
-            Get two ice flowered cappuccinos for the price of one
-          </StyledText>
-        </ColumnView>
-      </OfferContainer>
+      <StyledFlatlist
+        ItemSeparatorComponent={ItemSeparator}
+        numColumns={2}
+        // eslint-disable-next-line react-native/no-inline-styles
+        columnWrapperStyle={{
+          justifyContent: 'space-between',
+          paddingHorizontal: 10,
+        }}
+        data={products}
+        // @ts-ignore
+        scrollEnabled={false}
+        keyExtractor={item => (item as ProductType).id as string}
+        renderItem={({item}) => (
+          <ProductCard
+            handleProduct={id =>
+              navigation.navigate('ProductDetail', {productId: id})
+            }
+            product={item as ProductType}
+          />
+        )}
+      />
     </HomeContainer>
   );
 };

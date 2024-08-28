@@ -77,7 +77,8 @@ export const updateProduct = createAsyncThunk<
   {rejectValue: ErrorAxios}
 >('product/updateProduct', async (data, {rejectWithValue}) => {
   try {
-    const response = await apiClient.put(`/product/${data.id}`);
+    const response = await apiClient.put(`/products/${data.id}`, data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
