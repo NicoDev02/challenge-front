@@ -15,7 +15,7 @@ const config = {
     ),
   },
   resolver: {
-    assetExts: assetExts.filter(ext => ext !== 'svg'),
+    assetExts: [...assetExts.filter(ext => ext !== 'svg'), 'env'],
     sourceExts: [...sourceExts, 'svg'],
   },
 };

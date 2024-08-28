@@ -3,7 +3,7 @@ import {HomeStackParamList} from '../navigation/stacks/types';
 
 export type HomeScreenNavigationProp = NativeStackNavigationProp<
   HomeStackParamList,
-  'HomeScreen'
+  'Home'
 >;
 
 export type HomeScreenProps = {

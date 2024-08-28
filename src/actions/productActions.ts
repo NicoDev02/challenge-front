@@ -46,7 +46,6 @@ export const createProduct = createAsyncThunk<
 >('product/createProduct', async (productData, {rejectWithValue}) => {
   try {
     const createdProduct = await apiClient.post('/products', productData);
-    console.log(createdProduct.data);
     return createdProduct.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -78,7 +77,6 @@ export const updateProduct = createAsyncThunk<
 >('product/updateProduct', async (data, {rejectWithValue}) => {
   try {
     const response = await apiClient.put(`/products/${data.id}`, data);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

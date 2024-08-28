@@ -155,8 +155,7 @@ const CreateProduct = () => {
           const response = await apiClient.post('/cloudinary/upload', {
             image: image.data,
           });
-
-          images.push(response.data.url);
+          images.push(response.data);
         }),
       );
 

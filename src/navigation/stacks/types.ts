@@ -1,5 +1,5 @@
 export type HomeStackParamList = {
-  Home: undefined;
+  HomeTabs: undefined;
   ProductDetail: {productId: string};
   CreateProduct: undefined;
   EditProduct: {productId: string};

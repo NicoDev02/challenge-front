@@ -37,7 +37,6 @@ const userSlice = createSlice({
         state.error = null;
         state.token = action.payload.accessToken;
         state.user = action.payload.userInfo as User;
-        console.log(state);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -51,7 +50,6 @@ const userSlice = createSlice({
         state.error = null;
         state.token = null;
         state.user = null;
-        console.log(state);
       })
       .addCase(logout.rejected, (state, action) => {
         state.loading = false;

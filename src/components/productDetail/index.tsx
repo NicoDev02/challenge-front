@@ -34,6 +34,7 @@ const ProductDetail = ({
 }) => {
   const dispatch = useAppDispatch();
   const {product} = useAppSelector(state => state.product);
+  const {user} = useAppSelector(state => state.user);
   const [selectedSize, setSelectedSize] = useState<SizeType | null>(null);
   useEffect(() => {
     dispatch(getProductById(productId));
@@ -123,19 +124,23 @@ const ProductDetail = ({
                 Add to cart | ${selectedSize?.price}
               </StyledTextDetail>
             </AddToCartButton>
-            <RowView alignItems="center" justifyContent="space-around">
-              <DeleteButton onPress={handleDelete}>
-                <StyledText color="white" fontSize={18}>
-                  Delete
-                </StyledText>
-              </DeleteButton>
-              <EditButton
-                onPress={() => navigation.navigate('EditProduct', {productId})}>
-                <StyledText color="white" fontSize={18}>
-                  Edit
-                </StyledText>
-              </EditButton>
-            </RowView>
+            {user && (
+              <RowView alignItems="center" justifyContent="space-around">
+                <DeleteButton onPress={handleDelete}>
+                  <StyledText color="white" fontSize={18}>
+                    Delete
+                  </StyledText>
+                </DeleteButton>
+                <EditButton
+                  onPress={() =>
+                    navigation.navigate('EditProduct', {productId})
+                  }>
+                  <StyledText color="white" fontSize={18}>
+                    Edit
+                  </StyledText>
+                </EditButton>
+              </RowView>
+            )}
           </BodyContainer>
         </InfoProductContainer>
       </ProductContainer>

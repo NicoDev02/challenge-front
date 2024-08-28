@@ -30,18 +30,21 @@ type HomeProps = {
 const Home: React.FC<HomeProps> = ({navigation}) => {
   const {categories} = useAppSelector(state => state.category);
   const {products} = useAppSelector(state => state.product);
+
   const {user} = useAppSelector(state => state.user);
   const dispatch = useAppDispatch();
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType>(
-    categories[0],
-  );
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>();
   useEffect(() => {
     dispatch(getAllCategories(null));
     dispatch(getAllProducts(null));
   }, [dispatch]);
 
+  useEffect(() => {
+    setSelectedCategory(categories[0]);
+  }, [categories]);
+
   const filteredProducts = products.filter(
-    product => product.categoryId === selectedCategory.id,
+    product => product.categoryId === selectedCategory?.id,
   );
 
   const handleLogin = async () => {
@@ -77,12 +80,15 @@ const Home: React.FC<HomeProps> = ({navigation}) => {
             )}
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('CreateProduct' as never)}>
+            onPress={() =>
+              user && navigation.navigate('CreateProduct' as never)
+            }>
             <BellSVG width={25} height={30} />
           </TouchableOpacity>
         </RowView>
         <StyledText color="#382E1E" fontSize={22} fontWeight="bold" mb={18}>
-          Good evening, Monice
+          Good {new Date().getHours() > 12 ? 'Afternoon' : 'Morning'},{' '}
+          {user?.name || 'Guest'}
         </StyledText>
         <SearchBar />
         <StyledText
